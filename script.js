@@ -46,7 +46,6 @@ if(localStorage.product != null){
     dataProduct = [];
 }
 
- 
 
 submit.onclick = function(){
     let newProduct ={
@@ -62,5 +61,20 @@ submit.onclick = function(){
     dataProduct.push(newProduct);   //j'ajoute mon objet à mon tableau
     // save localStorage
     localStorage.setItem('product',   JSON.stringify(dataProduct))
-    console.log(newProduct)
+    //console.log(newProduct)
+
+    clearData();
+}
+
+
+// clear inputs
+function clearData(){
+   title.value = '';
+   price.value = '';
+   taxes.value = '';
+   ads.value = '';
+   discount.value = '';
+   total.innerHTML = '';
+   count.value = '';
+   category.value = '';
 }
