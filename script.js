@@ -7,7 +7,7 @@
 // delete
 // update
 // search
-//clean data
+// clean data
 
 // j'appelle mes inputs 
 // j'appelle mes inputs 
@@ -62,8 +62,11 @@ submit.onclick = function(){
         count:count.value,
         category:category.value.toLowerCase()
     }
-    if(doubleBtn === 'create'){
-        
+    if(title.value != '' 
+       && price.value != '' 
+       && category.value !=''
+       && newProduct.count < 50){
+        if(doubleBtn === 'create'){ 
         if(newProduct.count > 1){
         for(let i = 0; i < newProduct.count; i++){
             dataProduct.push(newProduct);   //j'ajoute mon objet à mon tableau
@@ -76,14 +79,16 @@ submit.onclick = function(){
           doubleBtn = 'create';
           submit.innerHTML = 'Créer';
           count.style.display = 'block';
-    }
     
-    
+       
+        }
+    clearData(); 
+    }   
+   
     // save localStorage
     localStorage.setItem('product',   JSON.stringify(dataProduct))
     //console.log(newProduct)
 
-    clearData(); 
     showData();
 }
 
@@ -100,7 +105,6 @@ function clearData(){
    category.value = '';
 }
 
-
 // read
 function showData()
 {
@@ -109,7 +113,7 @@ function showData()
   for(let i = 0; i < dataProduct.length; i++ ){   // ce for pour récupérer les produit de mon arary et l'ajouter dans le table
      table += `
                 <tr>
-                            <td>${i}</td>
+                            <td>${i+1}</td>
                             <td>${dataProduct[i].title}</td>
                             <td>${dataProduct[i].price}</td>
                             <td>${dataProduct[i].taxes}</td>
@@ -135,7 +139,6 @@ function deleteData(i)
   showData()
 }
 
-
 //counter : j'ai ajouter une condition dans la function submit
 // S'il s'agit plus d'un produit > 1 
 //loop répète le nombre (valeur count) du produit qui est taper par l'utilisateur.
@@ -160,7 +163,6 @@ function updateData(i){
       behavior: "smooth",
   })
 }
-
 
 //search
 let searchDouble = 'title';
@@ -216,9 +218,12 @@ function searchData(value)
                                         <td> <button onclick="updateData( ${i} )" id="uptade">modifier</button> </td>
                                         <td> <button onclick="deleteData( ${i} )" id="delete">supprimer</button> </td>
                                 </tr> 
-                            `
+                             `
            }
     }
     document.querySelector('#tbody').innerHTML = table;
 }
 }
+
+// clean data
+// J'ajoute une condition si la valeur du titre, prix et category n'est pas rempli il ne  pas creer un nouveau produit

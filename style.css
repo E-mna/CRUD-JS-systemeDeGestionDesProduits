@@ -25,8 +25,7 @@ input{
     border-radius: 7px;
     background: #c8d6e1;
     margin: 4px 0;
-    padding: 4px;
-     
+    padding: 4px;  
 }
 
 input:focus{
@@ -86,3 +85,5 @@ table th{
 th,td{
     padding: 15px;
 }
+
+ 
