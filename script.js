@@ -64,6 +64,7 @@ submit.onclick = function(){
     //console.log(newProduct)
 
     clearData();
+    showData();
 }
 
 
@@ -78,3 +79,29 @@ function clearData(){
    count.value = '';
    category.value = '';
 }
+
+
+// read
+function showData()
+{
+  let table = '';
+  for(let i = 0; i < dataProduct.length; i++ ){   // ce for pour récupérer les produit de mon arary et l'ajouter dans le table
+     table = `
+                <tr>
+                            <td>${i}</td>
+                            <td>${dataProduct[i].title}</td>
+                            <td>${dataProduct[i].price}</td>
+                            <td>${dataProduct[i].taxes}</td>
+                            <td>${dataProduct[i].ads}</td>
+                            <td>${dataProduct[i].discount}</td>
+                            <td>${dataProduct[i].total}</td>
+                            <td>${dataProduct[i].category}</td>
+                            <td> <button id="uptade">modifier</button> </td>
+                            <td> <button id="delete">supprimer</button> </td>
+                        </tr> 
+              `
+      
+  }
+   document.querySelector('#tbody').innerHTML = table;
+}
+showData()
