@@ -58,7 +58,15 @@ submit.onclick = function(){
         count:count.value,
         category:category.value
     }
-    dataProduct.push(newProduct);   //j'ajoute mon objet à mon tableau
+
+    if(newProduct.count > 1){
+        for(let i = 0; i < newProduct.count; i++){
+            dataProduct.push(newProduct);   //j'ajoute mon objet à mon tableau
+        }
+    }else{
+             dataProduct.push(newProduct); 
+    }
+    
     // save localStorage
     localStorage.setItem('product',   JSON.stringify(dataProduct))
     //console.log(newProduct)
@@ -114,3 +122,9 @@ function deleteData(i)
   localStorage.product = JSON.stringify(dataProduct); // supprimer de localStorage
   showData()
 }
+
+
+//count : j'ai ajouter une condition dans la function submit
+// S'il s'agit plus d'un produit > 1 
+//loop répète le nombre (valeur count) du produit qui est taper par l'utilisateur.
+//sinon il va creer un seul produit(quand la valeur count est < 1)
