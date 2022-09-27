@@ -170,22 +170,21 @@ function getSearch(id)
    let search = document.querySelector('#search')
    if(id == 'searchTitle'){
        searchDouble ='title';
-       search.placeholder = 'Rechercher par title'
    }else{
        searchDouble ='category';
-       search.placeholder = 'Rechercher par catégorie'
    }
-   search.focus()
-   search.value = '';
-   showData()
+   search.placeholder = 'Rechercher par ' + searchDouble;
+    search.focus()
+    search.value = '';
+    showData()
 }
 
 function searchData(value)
 {  
     let table =  '';
+    for(let i = 0; i < dataProduct.length ; i++){
     if(searchDouble == 'title')
     {
-       for(let i = 0; i < dataProduct.length ; i++){
            if(dataProduct[i].title.includes(value.toLowerCase())){
                    table += `
                                 <tr>
@@ -200,11 +199,9 @@ function searchData(value)
                                         <td> <button onclick="updateData( ${i} )" id="uptade">modifier</button> </td>
                                         <td> <button onclick="deleteData( ${i} )" id="delete">supprimer</button> </td>
                                 </tr> 
-                            `
+                          `
            }
-       }
     }else{
-        for(let i = 0; i < dataProduct.length ; i++){
            if(dataProduct[i].category.includes(value.toLowerCase())){
                    table += `
                                 <tr>
@@ -221,7 +218,7 @@ function searchData(value)
                                 </tr> 
                             `
            }
-       }
     }
     document.querySelector('#tbody').innerHTML = table;
+}
 }
