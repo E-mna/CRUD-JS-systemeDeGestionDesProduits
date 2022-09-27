@@ -20,6 +20,9 @@ let total = document.querySelector('#total');
 let count = document.querySelector('#count');
 let category = document.querySelector('#category');
 let submit = document.querySelector('#submit');
+let doubleBtn = 'create';
+let dummy;
+
 
 //je vérifie que tout le monde est présent 
 //console.log(title,price,taxes,ads, discount, total,count,category,submit)
@@ -58,20 +61,28 @@ submit.onclick = function(){
         count:count.value,
         category:category.value
     }
-
-    if(newProduct.count > 1){
+    if(doubleBtn === 'create'){
+        
+        if(newProduct.count > 1){
         for(let i = 0; i < newProduct.count; i++){
             dataProduct.push(newProduct);   //j'ajoute mon objet à mon tableau
         }
     }else{
              dataProduct.push(newProduct); 
     }
+    }else{
+          dataProduct[ dummy ] = newProduct
+          doubleBtn = 'create';
+          submit.innerHTML = 'Créer';
+          count.style.display = 'block';
+    }
+    
     
     // save localStorage
     localStorage.setItem('product',   JSON.stringify(dataProduct))
     //console.log(newProduct)
 
-    clearData();
+    clearData(); 
     showData();
 }
 
@@ -92,6 +103,7 @@ function clearData(){
 // read
 function showData()
 {
+  getTotal();
   let table = '';
   for(let i = 0; i < dataProduct.length; i++ ){   // ce for pour récupérer les produit de mon arary et l'ajouter dans le table
      table += `
@@ -104,7 +116,7 @@ function showData()
                             <td>${dataProduct[i].discount}</td>
                             <td>${dataProduct[i].total}</td>
                             <td>${dataProduct[i].category}</td>
-                            <td> <button id="uptade">modifier</button> </td>
+                            <td> <button onclick="updateData( ${i} )" id="uptade">modifier</button> </td>
                             <td> <button onclick="deleteData( ${i} )" id="delete">supprimer</button> </td>
                         </tr> 
               `
@@ -124,7 +136,27 @@ function deleteData(i)
 }
 
 
-//count : j'ai ajouter une condition dans la function submit
+//counter : j'ai ajouter une condition dans la function submit
 // S'il s'agit plus d'un produit > 1 
 //loop répète le nombre (valeur count) du produit qui est taper par l'utilisateur.
 //sinon il va creer un seul produit(quand la valeur count est < 1)
+
+
+//update
+function updateData(i){
+  title.value = dataProduct[i].title;
+  price.value = dataProduct[i].price;
+  taxes.value = dataProduct[i].taxes;
+  ads.value = dataProduct[i].ads;
+  discount.value = dataProduct[i].discount;
+  getTotal();
+  count.style.display = 'none';
+  category.value = dataProduct[i].category;
+  submit.innerHTML = 'Modifier';
+  doubleBtn ='update';
+  dummy = i; 
+  scroll({
+      top:0,
+      behavior: "smooth",
+  })
+}
