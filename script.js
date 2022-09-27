@@ -1,5 +1,5 @@
 // get total: fonction pour calculer le total 
-// get procuct: fonction pour créer un produit 
+// get product: fonction pour créer un produit 
 // save localStorage :function pour enregistrer les données dans localStorage
 // clear inputs : function qui nettoie les input pour que je pourrai taper d'autre infos
 // read : quand j'appuie sur le button créer il m'affiche les infos dans le tableau
@@ -35,4 +35,32 @@ function getTotal()
         total.innerHTML = '';
         total.style.background = 'rgb(141, 28, 28)';
     }
+}
+
+
+// get product
+let dataProduct;
+if(localStorage.product != null){                      
+    dataProduct = JSON.parse(localStorage.product)
+}else{
+    dataProduct = [];
+}
+
+ 
+
+submit.onclick = function(){
+    let newProduct ={
+        title:title.value,
+        price:price.value,
+        taxes:taxes.value,
+        ads:ads.value,
+        discount:discount.value,
+        total:total.innerHTML,
+        count:count.value,
+        category:category.value
+    }
+    dataProduct.push(newProduct);   //j'ajoute mon objet à mon tableau
+    // save localStorage
+    localStorage.setItem('product',   JSON.stringify(dataProduct))
+    console.log(newProduct)
 }
