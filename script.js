@@ -24,6 +24,7 @@ let doubleBtn = 'create';
 let dummy;
 
 
+
 //je vérifie que tout le monde est présent 
 //console.log(title,price,taxes,ads, discount, total,count,category,submit)
 
@@ -52,14 +53,14 @@ if(localStorage.product != null){
 
 submit.onclick = function(){
     let newProduct ={
-        title:title.value,
+        title:title.value.toLowerCase(),
         price:price.value,
         taxes:taxes.value,
         ads:ads.value,
         discount:discount.value,
         total:total.innerHTML,
         count:count.value,
-        category:category.value
+        category:category.value.toLowerCase()
     }
     if(doubleBtn === 'create'){
         
@@ -119,8 +120,7 @@ function showData()
                             <td> <button onclick="updateData( ${i} )" id="uptade">modifier</button> </td>
                             <td> <button onclick="deleteData( ${i} )" id="delete">supprimer</button> </td>
                         </tr> 
-              `
-      
+              ` 
   }
    document.querySelector('#tbody').innerHTML = table;
 }
@@ -159,4 +159,69 @@ function updateData(i){
       top:0,
       behavior: "smooth",
   })
+}
+
+
+//search
+let searchDouble = 'title';
+
+function getSearch(id)
+{
+   let search = document.querySelector('#search')
+   if(id == 'searchTitle'){
+       searchDouble ='title';
+       search.placeholder = 'Rechercher par title'
+   }else{
+       searchDouble ='category';
+       search.placeholder = 'Rechercher par catégorie'
+   }
+   search.focus()
+   search.value = '';
+   showData()
+}
+
+function searchData(value)
+{  
+    let table =  '';
+    if(searchDouble == 'title')
+    {
+       for(let i = 0; i < dataProduct.length ; i++){
+           if(dataProduct[i].title.includes(value.toLowerCase())){
+                   table += `
+                                <tr>
+                                        <td>${i}</td>
+                                        <td>${dataProduct[i].title}</td>
+                                        <td>${dataProduct[i].price}</td>
+                                        <td>${dataProduct[i].taxes}</td>
+                                        <td>${dataProduct[i].ads}</td>
+                                        <td>${dataProduct[i].discount}</td>
+                                        <td>${dataProduct[i].total}</td>
+                                        <td>${dataProduct[i].category}</td>
+                                        <td> <button onclick="updateData( ${i} )" id="uptade">modifier</button> </td>
+                                        <td> <button onclick="deleteData( ${i} )" id="delete">supprimer</button> </td>
+                                </tr> 
+                            `
+           }
+       }
+    }else{
+        for(let i = 0; i < dataProduct.length ; i++){
+           if(dataProduct[i].category.includes(value.toLowerCase())){
+                   table += `
+                                <tr>
+                                        <td>${i}</td>
+                                        <td>${dataProduct[i].title}</td>
+                                        <td>${dataProduct[i].price}</td>
+                                        <td>${dataProduct[i].taxes}</td>
+                                        <td>${dataProduct[i].ads}</td>
+                                        <td>${dataProduct[i].discount}</td>
+                                        <td>${dataProduct[i].total}</td>
+                                        <td>${dataProduct[i].category}</td>
+                                        <td> <button onclick="updateData( ${i} )" id="uptade">modifier</button> </td>
+                                        <td> <button onclick="deleteData( ${i} )" id="delete">supprimer</button> </td>
+                                </tr> 
+                            `
+           }
+       }
+    }
+    document.querySelector('#tbody').innerHTML = table;
 }

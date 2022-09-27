@@ -34,10 +34,10 @@
 
       <div class="outputs">
           <div class="searchBlock">
-              <input type="text" id="search" placeholder="Rechercher">
+              <input onkeyup="searchData(this.value)" type="text" id="search" placeholder="Rechercher">
               <div class="btnSearch">
-                  <button id="searchTitle">Rechercher par le nom</button>
-                  <button id="searchCategory">Rechercher par la catégorie</button>
+                  <button onclick="getSearch(this.id)" id="searchTitle">Rechercher par le nom</button>
+                  <button onclick="getSearch(this.id)" id="searchCategory">Rechercher par la catégorie</button>
                </div>   
 
                <div id="deleteAll"></div>
@@ -55,11 +55,8 @@
                           <th>Suppression</th>
                            
                       </tr>
-
-
-                    <tbody id="tbody">
-                        
-                    </tbody>
+                   
+                      <tbody id="tbody">     </tbody>
                   </table>
               
           </div>
