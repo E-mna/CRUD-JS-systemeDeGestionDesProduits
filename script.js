@@ -86,7 +86,7 @@ function showData()
 {
   let table = '';
   for(let i = 0; i < dataProduct.length; i++ ){   // ce for pour récupérer les produit de mon arary et l'ajouter dans le table
-     table = `
+     table += `
                 <tr>
                             <td>${i}</td>
                             <td>${dataProduct[i].title}</td>
@@ -97,7 +97,7 @@ function showData()
                             <td>${dataProduct[i].total}</td>
                             <td>${dataProduct[i].category}</td>
                             <td> <button id="uptade">modifier</button> </td>
-                            <td> <button id="delete">supprimer</button> </td>
+                            <td> <button onclick="deleteData( ${i} )" id="delete">supprimer</button> </td>
                         </tr> 
               `
       
@@ -105,3 +105,12 @@ function showData()
    document.querySelector('#tbody').innerHTML = table;
 }
 showData()
+
+
+//delete
+function deleteData(i)
+{
+  dataProduct.splice(i,1);                            // supprimer du Array
+  localStorage.product = JSON.stringify(dataProduct); // supprimer de localStorage
+  showData()
+}
