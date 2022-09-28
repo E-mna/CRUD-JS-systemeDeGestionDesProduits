@@ -14,7 +14,6 @@
 let title = document.querySelector('#title');
 let price = document.querySelector('#price');
 let taxes = document.querySelector('#taxes');
-let ads = document.querySelector('#ads');
 let discount = document.querySelector('#discount');
 let total = document.querySelector('#total');
 let count = document.querySelector('#count');
@@ -32,7 +31,7 @@ let dummy;
 function getTotal()
 {
     if(price.value != ''){
-        let result = (+price.value + +taxes.value + +ads.value) - +discount.value;
+        let result = (+price.value + +taxes.value) - +discount.value;
         total.innerHTML = result;
         total.style.background = '#040';
     }else{
@@ -56,7 +55,6 @@ submit.onclick = function(){
         title:title.value.toLowerCase(),
         price:price.value,
         taxes:taxes.value,
-        ads:ads.value,
         discount:discount.value,
         total:total.innerHTML,
         count:count.value,
@@ -79,8 +77,6 @@ submit.onclick = function(){
           doubleBtn = 'create';
           submit.innerHTML = 'Créer';
           count.style.display = 'block';
-    
-       
         }
     clearData(); 
     }   
@@ -98,7 +94,6 @@ function clearData(){
    title.value = '';
    price.value = '';
    taxes.value = '';
-   ads.value = '';
    discount.value = '';
    total.innerHTML = '';
    count.value = '';
@@ -117,7 +112,6 @@ function showData()
                             <td>${dataProduct[i].title}</td>
                             <td>${dataProduct[i].price}</td>
                             <td>${dataProduct[i].taxes}</td>
-                            <td>${dataProduct[i].ads}</td>
                             <td>${dataProduct[i].discount}</td>
                             <td>${dataProduct[i].total}</td>
                             <td>${dataProduct[i].category}</td>
@@ -150,7 +144,6 @@ function updateData(i){
   title.value = dataProduct[i].title;
   price.value = dataProduct[i].price;
   taxes.value = dataProduct[i].taxes;
-  ads.value = dataProduct[i].ads;
   discount.value = dataProduct[i].discount;
   getTotal();
   count.style.display = 'none';
@@ -194,7 +187,6 @@ function searchData(value)
                                         <td>${dataProduct[i].title}</td>
                                         <td>${dataProduct[i].price}</td>
                                         <td>${dataProduct[i].taxes}</td>
-                                        <td>${dataProduct[i].ads}</td>
                                         <td>${dataProduct[i].discount}</td>
                                         <td>${dataProduct[i].total}</td>
                                         <td>${dataProduct[i].category}</td>
@@ -211,7 +203,6 @@ function searchData(value)
                                         <td>${dataProduct[i].title}</td>
                                         <td>${dataProduct[i].price}</td>
                                         <td>${dataProduct[i].taxes}</td>
-                                        <td>${dataProduct[i].ads}</td>
                                         <td>${dataProduct[i].discount}</td>
                                         <td>${dataProduct[i].total}</td>
                                         <td>${dataProduct[i].category}</td>
